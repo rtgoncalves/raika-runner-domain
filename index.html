@@ -1,18 +1,162 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Raika Runner</title>
+    <title>Feedback - Raika Endless Runner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --purple-gradient: #6a11cb;
+            --blue-gradient: #2575fc;
+            --gray-gradient: #3f51b5;
+            --text-color: #fff;
+            --button-bg: #fff;
+            --button-text: #2575fc;
+            --footer-text: #ccc;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--purple-gradient) 0%, var(--blue-gradient) 50%, var(--gray-gradient) 100%);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .language-switcher {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+        
+        .language-switcher button {
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--text-color);
+            border: 1px solid var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .language-switcher button:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        p {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .cta-button {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 700;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        footer {
+            padding: 1rem;
+            color: var(--footer-text);
+            font-size: 0.9rem;
+            margin-top: auto;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+            p {
+                font-size: 1rem;
+            }
+            .cta-button {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Support</h1>
-    <p>Click the button below to contact us.</p>
+    <div class="language-switcher">
+        <button onclick="setLanguage('pt-br')">PT</button>
+        <button onclick="setLanguage('en-us')">EN</button>
+    </div>
 
-    <a href="https://forms.gle/8mNN4Vv6p3jCdxjUA" target="_blank">
-        <button>Feedback</button>
-    </a>
+    <main class="container">
+        <h1 id="main-title">Seu feedback nos ajuda a melhorar o jogo da Raika.</h1>
+        <p id="description">Conte para nós o que você achou do jogo e ajude-nos a criar novas aventuras para a Raika.</p>
+        <a id="cta-link" href="https://forms.gle/8mNN4Vv6p3jCdxjUA" target="_blank" class="cta-button">Enviar Feedback</a>
+    </main>
+
+    <footer>
+        <p id="developer-info">Desenvolvido por Rodrigo Gonçalves</p>
+    </footer>
+
+    <script>
+        const content = {
+            'pt-br': {
+                title: "Seu feedback nos ajuda a melhorar o jogo da Raika.",
+                description: "Conte para nós o que você achou do jogo e ajude-nos a criar novas aventuras para a Raika.",
+                button: "Enviar Feedback",
+                developer: "Desenvolvido por Rodrigo Gonçalves"
+            },
+            'en-us': {
+                title: "Your feedback helps us improve Raika's game.",
+                description: "Tell us what you think about the game and help us create new adventures for Raika.",
+                button: "Submit Feedback",
+                developer: "Developed by Rodrigo Gonçalves"
+            }
+        };
+
+        function setLanguage(lang) {
+            document.documentElement.lang = lang;
+            document.getElementById('main-title').innerText = content[lang].title;
+            document.getElementById('description').innerText = content[lang].description;
+            document.getElementById('cta-link').innerText = content[lang].button;
+            document.getElementById('developer-info').innerText = content[lang].developer;
+        }
+
+        // Detecta o idioma do navegador e define o conteúdo
+        const userLang = navigator.language || navigator.userLanguage;
+        const initialLang = userLang.startsWith('en') ? 'en-us' : 'pt-br';
+        setLanguage(initialLang);
+    </script>
 
 </body>
 </html>
